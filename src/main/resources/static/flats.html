@@ -1,0 +1,84 @@
+<div class="container-fluid text-center">
+    <div ng-if="loading == true">
+        <div class="row">
+            <div class="col-md-12">
+                <img src="http://dmh-cdp.wowspace.org/team/charts/loading.gif"/>
+            </div>
+        </div>
+    </div>
+    <div ng-if="loading == false">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="pull-right"><input placeholder="Search Flat" ng-model="flatFilter"/>
+                    <a data-toggle="modal" data-target="#myModal" data-toggle="tooltip" title="Add Flat"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                    <a href="#" data-toggle="tooltip" title="Refresh" ng-click="refresh()"><i class="fa fa-refresh" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="row content">
+            <div class="panel-group">
+                <div ng-cloak ng-repeat="flat in flats | filter: { name: flatFilter } ">
+                    <div class="col-md-3" style="padding: 10px">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">{{flat.name}}</div>
+                            <div class="panel-body">Panel Content</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add Flat</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="newFlatForm" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="flatName">Flat Name:</label>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" id="flatName" placeholder="Flat Name" ng-model="newFlat.name" required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="SquareFeet">Sqft:</label>
+                            <div class="col-md-3">
+                                <input type="number" class="form-control" id="SquareFeet" ng-model="newFlat.sft" required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="TerraceSqft">Terrace Sqft:</label>
+                            <div class="col-md-3">
+                                <div class="checkbox">
+                                    <input type="number" class="form-control" id="TerraceSqft" ng-model="newFlat.terraceSft" required="true">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3" for="type">Type:</label>
+                            <div class="col-md-3">
+                                    <select class="form-control" id="type" ng-model="newFlat.type" required="true">
+                                        <option>2bhk</option>
+                                        <option>3bhk</option>
+                                    </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-6">
+                                <button class="btn btn-default" ng-click="saveFlat(newFlat)">Add</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
